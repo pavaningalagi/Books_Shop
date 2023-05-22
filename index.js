@@ -7,7 +7,10 @@ const PORT = process.env.PORT || 8081;
 const { connection } = require("./config/db");
 const { userRoutes } = require("./routes/userRoutes");
 const { booksRoutes } = require("./routes/booksRoutes");
+const { authenticate } = require("./middleware/authenticate");
+const { logger } = require("./middleware/logger");
 
+app.use(logger);
 app.get("/", (req, res) => {
   try {
     res.status(200).send({ message: "Welcome to Book Shop!" });
@@ -17,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRoutes);
-// app.use("/books", booksRoutes);
+app.use("/books", authenticate, booksRoutes);
 
 app.listen(PORT, async () => {
   try {
