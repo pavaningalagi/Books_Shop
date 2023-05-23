@@ -30,20 +30,20 @@ Step 2: Run the Redis Server in CMD:
 
 Step 3 : Running the project:
 
-⦁ First npm install for install all packages latest version.
-⦁ npm run server for to start the server.
+    ⦁	First npm install for install all packages latest version.
+    ⦁	npm run server for to start the server.
 
 Folder Structure & Customization:
 
-⦁ In index.js file you will find all declared api endpoint for different route.
+    ⦁	In index.js file you will find all declared api endpoint for different route.
 
-⦁ /config : This folder contain MongoDB Configuration and Redis Configuration.
+    ⦁	/config : This folder contain MongoDB Configuration and Redis Configuration.
 
-⦁ /models: This folder contain all model create with mongoose schema validation.
+    ⦁	/models: This folder contain all model create with mongoose schema validation.
 
-⦁ /routes: This folder contain Two routes: userRoutes and booksRoutes.
+    ⦁	/routes: This folder contain Two routes: userRoutes and booksRoutes.
 
-⦁ /middleware : This folder contain authentication middleware and logger middleware.
+    ⦁	/middleware : This folder contain authentication middleware and logger middleware.
 
 Configuration & Deployment:
 
