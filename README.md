@@ -45,6 +45,40 @@ Folder Structure & Customization:
 
     ⦁	/middleware : This folder contain authentication middleware and logger middleware.
 
+Routes:
+
+    ⦁	POST /users/register : To register a user;
+        Body: {
+                "name": "user name",
+                "email": "user mail id",
+                "password": "user password",
+            }
+
+    ⦁	POST /users/login : To login a user;
+        Body: {
+                "email": "user mail id",
+                "password": "user password",
+            }
+
+    Take the token from response and pass in Headers every time you using api of books:
+        In Headers:
+        Authorization: Token from login response.
+
+    ⦁	POST /books : To add a book to Database.
+        Body: {
+                "title": "Title of the book",
+                "author": "Author Name",
+                "year": Year of published. [Number]
+            }
+
+    ⦁   GET  /books : To Get all books from Database.
+
+    ⦁   GET /books/:id : To Get a book from Database with an id of the book.
+
+    ⦁   PUT /books/:id : To Update a book details using the id of the book.
+
+    ⦁   DELETE /books/:id : To Delete a book from Database with an id of the book.
+
 Configuration & Deployment:
 
 I used Cyclic for hosting this server if you want to hosting on Cyclic just follow their documentation.
