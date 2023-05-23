@@ -19,6 +19,7 @@ let redis_post = async (req, res, next) => {
 booksRoutes.get("/", redis_post, async (req, res) => {
   try {
     const books = await booksModel.find();
+
     if (books.length > 0) {
       const result = await client.HSET("books", "books", JSON.stringify(books));
       console.log(result);
