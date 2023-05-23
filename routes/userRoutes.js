@@ -9,9 +9,9 @@ const userRoutes = express.Router();
 userRoutes.post("/register", async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    const userFound = await userModel.findOne({ email: email });
+    const userFound = await userModel.find({ email: email });
     const saltRounds = 10;
-    if (userFound) {
+    if (userFound.length>0) {
       res.status(200).send({ message: "User already registered please login" });
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
