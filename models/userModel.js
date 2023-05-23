@@ -13,8 +13,6 @@ userSchema.index({
   name: 1,
   email: 1,
   password: 1,
-  createdAt: 1,
-  updatedAt: 1,
 });
 const userModel = mongoose.model("user", userSchema);
 

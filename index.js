@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 8081;
+const { client } = require("./config/redis");
 
 const { connection } = require("./config/db");
 const { userRoutes } = require("./routes/userRoutes");
@@ -25,7 +26,10 @@ app.use("/books", authenticate, booksRoutes);
 app.listen(PORT, async () => {
   try {
     await connection;
+    await client.connect();
     console.log("Database connection established");
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   console.log(`server listening on port ${PORT}`);
 });

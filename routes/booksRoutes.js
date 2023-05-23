@@ -1,14 +1,30 @@
 const express = require("express");
 const booksRoutes = express.Router();
 const { booksModel } = require("../models/booksModel");
+const { client } = require("../config/redis");
+
+let redis_post = async (req, res, next) => {
+  const result = await client.HGET("books", "books");
+  console.log(result);
+  console.log(JSON.parse(result));
+  if (result) {
+    console.log("books data from redis");
+    res.status(200).send({ message: "Book data", data: JSON.parse(result) });
+  } else {
+    next();
+  }
+};
 
 //get all books
-booksRoutes.get("/", async (req, res) => {
+booksRoutes.get("/", redis_post, async (req, res) => {
   try {
     const books = await booksModel.find();
     if (books.length > 0) {
-      //   console.log(books[0]._id);
+      const result = await client.HSET("books", "books", JSON.stringify(books));
+      console.log(result);
+      console.log("books data from mongoDB");
       res.status(200).send({ message: "Books Data", data: books });
+      // });
     } else {
       res.status(404).send({ message: "Books Not Found" });
     }
@@ -36,7 +52,7 @@ booksRoutes.get("/:id", async (req, res) => {
 booksRoutes.post("/", async (req, res) => {
   try {
     const { title, author, year } = req.body;
-    const isThere = await booksModel.findOne({title});
+    const isThere = await booksModel.findOne({ title });
     if (isThere) {
       res.status(200).send({
         message: "Books is already available please add another book",

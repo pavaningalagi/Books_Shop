@@ -9,8 +9,6 @@ booksSchema.index({
   title: 1,
   author: 1,
   year: 1,
-  createdAt: 1,
-  updatedAt: 1,
 });
 const booksModel = mongoose.model("book", booksSchema);
 
